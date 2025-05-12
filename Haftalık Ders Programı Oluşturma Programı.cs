@@ -192,28 +192,30 @@ namespace ConsoleApp1
             int dersSayisi = Convert.ToInt32(Console.ReadLine());
             int[,,] ders = new int[dersSayisi, 2, 3]; // ders kodu, ders günü, ders başlanıgıç ve bitiş saati
             string[] dersIsim = new string[dersSayisi];
+            bool kosul;
             for (int i = 0; i < dersSayisi; i++)
             {
                 Console.Write("{0}. dersin adı: ", (i + 1));
                 do
-                {
+                {                    
                     dersIsim[i] = Console.ReadLine();
-                    if (dersIsim[i].Length > 34)
+                    kosul = dersIsim[i].Length > 34;
+                    if (kosul)
                     {
                         Console.WriteLine("Dersin ismini kısaltınız");
                     }
-                } while ((dersIsim[i].Length > 34));
+                } while (kosul);
 
                 Console.Write("{0} dersi hangi gün ? (Pzt:1, Sal:2, Çar:3, Per:4, Cum:5): ", dersIsim[i]);
                 do
                 {
-
                     ders[i, 1, 0] = Convert.ToInt32(Console.ReadLine()) - 1;
-                    if (!(ders[i, 1, 0] >= (1 - 1) && ders[i, 1, 0] <= (5 - 1)))
+                    kosul = !(ders[i, 1, 0] >= (1 - 1) && ders[i, 1, 0] <= (5 - 1));                   
+                    if (kosul)
                     {
                         Console.WriteLine("1-5 arası");
                     }
-                } while (!(ders[i, 1, 0] >= (1 - 1) && ders[i, 1, 0] <= (5 - 1)));
+                } while (kosul);
 
                 Console.Write("{0} dersi hangi saatte başlıyor ?(Sadece saat): ", dersIsim[i]);
                 do
@@ -222,26 +224,30 @@ namespace ConsoleApp1
                     do
                     {
                         ders[i, 0, 1] = Convert.ToInt32(Console.ReadLine());
-                        if (!(ders[i, 0, 1] >= 8 && ders[i, 0, 1] <= 16))
+                        kosul = !(ders[i, 0, 1] >= 8 && ders[i, 0, 1] <= 16);                       
+                        if (kosul)
                         {
                             Console.WriteLine("8-16 arası");
                         }
-                    } while (!(ders[i, 0, 1] >= 8 && ders[i, 0, 1] <= 16));
+                    } while (kosul);
 
                     Console.Write("{0} dersi hangi saatte bitiyor ?(Sadece saat): ", dersIsim[i]);
                     do
                     {
+                        
                         ders[i, 0, 2] = Convert.ToInt32(Console.ReadLine());
-                        if (!(ders[i, 0, 2] >= 10 && ders[i, 0, 1] <= 17))
+                        kosul = !(ders[i, 0, 2] >= 10 && ders[i, 0, 1] <= 17);
+                        if (kosul)
                         {
                             Console.WriteLine("10-17 arası");
                         }
-                    } while (!(ders[i, 0, 2] >= 10 && ders[i, 0, 2] <= 17));
-                    if (ders[i, 0, 2] - ders[i, 0, 1] < 2)
+                    } while (kosul);
+                    kosul = ders[i, 0, 2] - ders[i, 0, 1] < 2;
+                    if (kosul)
                     {
                         Console.WriteLine("Minimum 2 saat");
                     }
-                } while (ders[i, 0, 2] - ders[i, 0, 1] < 2);
+                } while (kosul);
             }
             Bilgitablolama(ders, dersIsim);
         }
